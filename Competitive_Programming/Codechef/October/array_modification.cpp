@@ -5,12 +5,12 @@ using namespace std;
 
 int main()
 {
-    int test_cases;
+    short test_cases;
     cin>>test_cases;
     while(test_cases--)
     {
         int elements_count;
-        float k;
+        unsigned long long int k;
         cin>>elements_count>>k;
         int elements[elements_count];
         for(int i=0; i<elements_count; i++)
@@ -19,7 +19,7 @@ int main()
         }
 
         int a, b;
-        for(float i=0; i<k; i++)
+        for(unsigned long long int i=0; i<k; i++)
         {
             a=elements[(int)i%elements_count];
             b=elements[elements_count-((int)i%elements_count)-1];
