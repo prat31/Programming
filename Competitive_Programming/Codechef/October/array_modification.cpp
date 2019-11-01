@@ -17,7 +17,7 @@ int main()
         {
             cin>>elements[i];
         }
-
+        
         int a, b;
         for(unsigned long long int i=0; i<k; i++)
         {
