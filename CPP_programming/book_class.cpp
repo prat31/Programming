@@ -17,4 +17,7 @@ int main(){
     cout<<"title = "<<b1.title<<endl;
     cout<<"author = "<<b1.author<<endl;
     cout<<"pages = "<<b1.pages<<endl;
+    while(b1>0){
+        
+    }
 }
