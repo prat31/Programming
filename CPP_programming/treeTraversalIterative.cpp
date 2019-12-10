@@ -19,7 +19,7 @@ struct node* newNode(int data){
 void iterativePreorder(struct node* root){
     if(root==NULL)  return;
 
-    stack<struct node*> nodeStack;
+    stack<struct node*> nodeStack;  
     nodeStack.push(root);
 
     while(nodeStack.empty()==false){
