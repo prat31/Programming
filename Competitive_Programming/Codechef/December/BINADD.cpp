@@ -1,95 +1,48 @@
-#include<iostream>
+#include<bits/stdc++.h>
 
 using namespace std;
 
-bool notZero(string str){
+bool allZero(string str){
     for(int i=0; i<str.size(); i++){
-        if(str[i]=='1')   return true;
+        if(str[i]=='1') return false;
     }
-    return false;
+    return true;
 }
 
-string XOR(string a, string b){
-    int maxSize = a.size();
-    int minSize = b.size();
-    string maxString = a;
-    string minString = b;
-    if(b.size()>a.size()){
-       maxSize = b.size();
-       minSize = a.size();
-       maxString = b;
-       minString = a;
-    }
-    string answer;
-    for(int i=0; i<maxSize; i++){
-        if(maxSize-minSize-i>0){
-            if(maxString[i]=='1')   
-                answer.push_back('1');
-            else
-                answer.push_back('0');
-        }
-        else{
-            if(maxString[i]=='0'&&minString[i-(maxSize-minSize)]=='0')
-                answer.push_back('0');
-            else if(maxString[i]=='1'&&minString[i-(maxSize-minSize)]=='1')
-                answer.push_back('0');
-            else if(maxString[i]=='1'&&minString[i-(maxSize-minSize)]=='0')
-                answer.push_back('1');
-            else if(maxString[i]=='0'&&minString[i-(maxSize-minSize)]=='1')
-                answer.push_back('1');
-        }
-    }
-    return answer;
-}
-
-string AND(string a, string b){
-    int maxSize = a.size();
-    int minSize = b.size();
-    string maxString = a;
-    string minString = b;
-    if(b.size()>a.size()){
-       maxSize = b.size();
-       minSize = a.size();
-       maxString = b;
-       minString = a;
-    }
-    string answer;
-    for(int i=0; i<maxSize; i++){
-        if(maxSize-minSize-i>0){
-            answer.push_back('0');
-        }
-        else{
-            if(maxString[i]=='1'&&minString[i-(maxSize-minSize)]=='1')
-                answer.push_back('1');
-            else 
-                answer.push_back('0');
-        }
-    }
-    return answer;
-}
 
 int main(){
     int testCases;
     cin>>testCases;
     while(testCases--){
-        string A;
-        string B;
+        string A, B;
         cin>>A;
         cin>>B;
-        long long int answer=0;
-        while(notZero(B)){
-            answer++;
-            string U = XOR(A, B);
-            string V = AND(A, B);
-            A = U;
-            if(!notZero(V)){
-                break;
+        int answer=1;
+        if(A.size()!=B.size()){
+            if(A.size()>B.size()){
+                B.insert(0,(int)A.size()-B.size(), '0');
             }
-            else{
-                V.push_back('0');
-                B=V;
+            else if(A.size()<B.size()){
+                A.insert(0, (int)B.size()-A.size(), '0');
             }
         }
+        int stringSize = A.size()>B.size()?A.size():B.size();
+        bool stopFor = false;
+        bool didCase = false;
+        for(int i=0; i<stringSize; i++){
+            if(A[stringSize-1-i]=='1'&&B[stringSize-1-i]=='1'){
+                didCase = true;
+                for(int i=stringSize-i-2; i>=0; i--){
+                    if((A[i]=='1'&&B[i]=='0')||(A[i]=='0'&&B[i]=='1'))  answer++;
+                    else{
+                        stopFor = true;
+                        break;
+                    }
+                }
+            }
+            if(stopFor==true)   break;
+        }
+        if(didCase==false&&allZero(B))  answer=0;
         cout<<answer<<endl;
     }
     return 0;

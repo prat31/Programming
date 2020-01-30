@@ -1,33 +1,29 @@
-#include<iostream>
-#include<cstring>
-
+#include<bits/stdc++.h>
+#include<regex>
 using namespace std;
 
-void inline_multiply(int num, int multiplier){
-    int num_arr[3];
-    int num_arr_counter=0;
-    int temp=num;
-    while(temp>0){
-        num_arr[num_arr_counter++]=temp%10;
-        temp=temp/10;
-    }
-    int carry=0;
-    int result[200];
-    memset(result, 0, 200*sizeof(int));
-    int result_counter=0;
-    for(int i=0; i<=num_arr_counter; i++){
-        temp=num_arr[i]*multiplier;
-        temp=temp+carry;
-        result[result_counter++]=temp%10;
-        carry=temp/10;
-    }
-    for(int i=result_counter; i>=0; i++){
-        printf("%d", result[i-1]);
-    }
-
-}
-
 int main(){
-    inline_multiply(5, 5);
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(nullptr);
+    // cout.tie(nullptr);
+    // cin.ignore('\n');
+    int testCases;
+    // cin>>testCases;
+    testCases=1;
+    while(testCases--){
+        int n;
+        cin>>n;
+        vector<pair<string, string>> arr(n);
+        for(int i=0; i<n; i++){
+            cin>>arr[i].first;
+            cin>>arr[i].second;
+        }
+        sort(arr.begin(), arr.end());
+        for(int i=0; i<n; i++){
+            if(regex_match(arr[i].second, regex(".+@gmail.com"))){
+                cout<<arr[i].first<<endl;
+            }
+        }
+    }
     return 0;
 }
